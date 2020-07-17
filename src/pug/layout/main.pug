@@ -1,0 +1,18 @@
+block variables
+
+
+
+doctype html
+html(language='language')
+    head
+        meta(charset='UTF-8')
+        title #{title}
+        meta(name="description", content=description)   
+    body(class=pageClass)
+        header 
+            include ../includes/modules/header.pug
+        .wrap
+            block content  
+        footer
+            include ../includes/modules/footer.pug
+        block script

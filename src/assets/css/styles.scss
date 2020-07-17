@@ -1,0 +1,28 @@
+@import '~normalize.css';
+
+.main-block {
+  display: none;
+  max-width: 100px;
+  max-height: 100px;
+  background-color: red;
+  color: #fff;
+  font-size: 40px;
+}
+
+.beauty {
+  font-size: 50px;
+  background-color: rgb(185, 66, 66);
+  text-align: center;
+}
+
+.button {
+  background-color: rgb(218, 205, 96);
+  color: #000;
+  font-size: 20px;
+  padding: 20px;
+}
+
+.active {
+  color: red;
+  font-size: 50px;
+}

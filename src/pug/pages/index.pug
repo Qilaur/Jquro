@@ -1,0 +1,13 @@
+extends ../layout/main.pug
+block variables
+    - var title = 'Quro';
+    - var description = 'framework for lazy';
+    - var language = 'ru';
+    - var pageClass = 'index';
+
+block content
+    h1.main-header
+    |   Hello world
+    - for(let i = 0; i < 10; i++)
+      .main-block O
+    button.button Click Me!
