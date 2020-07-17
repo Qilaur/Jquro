@@ -1,5 +1,5 @@
 import $ from './core';
-import './modules/diplay';
+import './modules/display';
 import './modules/classes';
 import './modules/actions';
 import './modules/attributes';

@@ -1,10 +1,17 @@
 import $ from '../core';
 
+const validateElements = (element, firstValid, secondValid, thirdValid) => {
+  if (!element[firstValid]) {
+    continue;
+  } else if (!element[firstValid][secondValid] ) {
+    continue;
+  } else if (!element[firstValid][secondValid][thirdValid] ) {
+    continue;
+  }
+}
 $.prototype.dBlock = function() {
   for (let i = 0; i < this.length; i += 1) {
-    if (!this[i].style) {
-      continue;
-    }
+    validateElements(this[i], 'style', 'display');
     this[i].style.display = 'block';
   }
   return this;
@@ -12,7 +19,7 @@ $.prototype.dBlock = function() {
 
 $.prototype.dFlex = function() {
   for (let i = 0; i < this.length; i += 1) {
-    if (!this[i].style) {
+    if (!this[i].style.display) {
       continue;
     }
     this[i].style.display = 'flex';
@@ -20,9 +27,29 @@ $.prototype.dFlex = function() {
   return this;
 };
 
+$.prototype.dInlineBlock = function() {
+  for (let i = 0; i < this.length; i += 1) {
+    if (!this[i].style.display) {
+      continue;
+    }
+    this[i].style.display = 'inline-block';
+  }
+  return this;
+};
+
+$.prototype.dInline = function() {
+  for (let i = 0; i < this.length; i += 1) {
+    if (!this[i].style.display) {
+      continue;
+    }
+    this[i].style.display = 'inline';
+  }
+  return this;
+};
+
 $.prototype.dNone = function() {
   for (let i = 0; i < this.length; i += 1) {
-    if (!this[i].style) {
+    if (!this[i].style.display) {
       continue;
     }
     this[i].style.display = 'none';
@@ -32,7 +59,7 @@ $.prototype.dNone = function() {
 
 $.prototype.dReset = function() {
   for (let i = 0; i < this.length; i += 1) {
-    if (!this[i].style) {
+    if (!this[i].style.display) {
       continue;
     }
     this[i].style.display = '';
@@ -42,7 +69,7 @@ $.prototype.dReset = function() {
 
 $.prototype.dToggle = function() {
   for (let i = 0; i < this.length; i += 1) {
-    if (!this[i].style) {
+    if (!this[i].style.display) {
       continue;
     }
 
