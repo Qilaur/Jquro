@@ -5,7 +5,7 @@ $.prototype.d = function (type) {
   const searchElement = type.toLowerCase().replace(' ', '');
 
   for (let i = 0; i < this.length; i += 1) {
-    if (displayTypes.indexOf(searchElement) === -1) {
+    if (displayTypes.indexOf(searchElement) !== -1) {
       if (this[i].style) {
         this[i].style.display = type === '' ? 'initial' : type;
       }
