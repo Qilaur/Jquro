@@ -3,18 +3,18 @@ import displayTypes from '../types/displayTypes';
 
 $.prototype.d = function (type) {
   const searchElement = type.toLowerCase().replace(' ', '');
-  if (displayTypes.indexOf(searchElement) !== -1) {
-    for (let i = 0; i < this.length; i += 1) {
+
+  for (let i = 0; i < this.length; i += 1) {
+    if (displayTypes.indexOf(searchElement) === -1) {
       if (this[i].style) {
         this[i].style.display = type === '' ? 'initial' : type;
       }
+      return this;
     }
-    return this;
   }
-  return null; // TODO: Подумать, что возвращать.
 };
 
-$.prototype.dToggle = function() {
+$.prototype.dToggle = function () {
   for (let i = 0; i < this.length; i += 1) {
     if (!this[i].style) {
       continue;
