@@ -31,7 +31,13 @@ $.prototype.removeAttr = function (attrName) {
       console.error('Attribute name is undefined');
       return this;
     }
-    this[i].removeAttribute(attrName);
+    if (Array.isArray(attrName)) {
+      attrName.forEach((item) => {
+        this[i].removeAttribute(item);
+      });
+    } else {
+      this[i].removeAttribute(attrName);
+    }
   }
   return this;
 };

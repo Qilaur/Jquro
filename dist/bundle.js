@@ -553,12 +553,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var action = function action() {
   console.log(this, 'LOX');
 };
 
-Object(_lib_libMain__WEBPACK_IMPORTED_MODULE_1__["default"])('div').setAttr(['data-url', 'data-src'], 'https://hello.com');
+console.log($('div'));
 
 /***/ }),
 

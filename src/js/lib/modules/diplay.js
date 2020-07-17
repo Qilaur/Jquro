@@ -20,6 +20,26 @@ $.prototype.dFlex = function() {
   return this;
 };
 
+$.prototype.dInlineBlock = function() {
+  for (let i = 0; i < this.length; i += 1) {
+    if (!this[i].style) {
+      continue;
+    }
+    this[i].style.display = 'inline-block';
+  }
+  return this;
+};
+
+$.prototype.dInline = function() {
+  for (let i = 0; i < this.length; i += 1) {
+    if (!this[i].style) {
+      continue;
+    }
+    this[i].style.display = 'inline';
+  }
+  return this;
+};
+
 $.prototype.dNone = function() {
   for (let i = 0; i < this.length; i += 1) {
     if (!this[i].style) {
