@@ -245,8 +245,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core */ "./js/lib/core.js");
 /* harmony import */ var _modules_display__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/display */ "./js/lib/modules/display.js");
 /* harmony import */ var _modules_classes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/classes */ "./js/lib/modules/classes.js");
-/* harmony import */ var _modules_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/actions */ "./js/lib/modules/actions.js");
-/* harmony import */ var _modules_attributes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/attributes */ "./js/lib/modules/attributes.js");
+/* harmony import */ var _modules_attributes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/attributes */ "./js/lib/modules/attributes.js");
+/* harmony import */ var _modules_handlers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/handlers */ "./js/lib/modules/handlers.js");
+/* harmony import */ var _modules_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/actions */ "./js/lib/modules/actions.js");
+
 
 
 
@@ -265,50 +267,44 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./js/lib/core.js");
-/* harmony import */ var file_loader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! file-loader */ "../node_modules/file-loader/dist/cjs.js");
-/* harmony import */ var file_loader__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(file_loader__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var file_loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! file-loader */ "../node_modules/file-loader/dist/cjs.js");
+/* harmony import */ var file_loader__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(file_loader__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core */ "./js/lib/core.js");
 
 
 
-_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.on = function (eventName, callbackFunc) {
+_core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.ForEachConstructor = function (callback, filter) {
   for (var i = 0; i < this.length; i += 1) {
-    if (!this[i].addEventListener || !eventName || !callbackFunc) {
-      return this;
+    if (!filter(this[i])) {
+      continue;
     }
 
-    this[i].addEventListener(eventName, callbackFunc);
+    callback(this[i]);
   }
-
-  return this;
 };
 
-_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.off = function (eventName, callbackFunc) {
-  for (var i = 0; i < this.length; i += 1) {
-    if (!this[i].removeEventListener || !eventName || !callbackFunc) {
-      return this;
-    }
+_core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.html = function (content) {
+  var _this = this;
 
-    this[i].removeEventListener(eventName, callbackFunc);
-  }
-
-  return this;
-};
-
-_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.click = function (callbackFunc) {
-  for (var i = 0; i < this.length; i += 1) {
-    if (!this[i].click || !this[i].addEventListener) {
-      return this;
-    }
-
-    if (callbackFunc) {
-      this[i].addEventListener('click', callbackFunc);
+  this.ForEachConstructor(function (item) {
+    if (content) {
+      if (content.innerHTML) {
+        item.innerHTML = content.innerHTML;
+      } else {
+        item.innerHTML = content;
+      }
     } else {
-      this[i].click();
+      return item.innerHTML;
     }
-  }
 
-  return this;
+    return _this;
+  }, function (item) {
+    if (item.innerHTML) {
+      return true;
+    }
+
+    return false;
+  });
 };
 
 /***/ }),
@@ -534,6 +530,63 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.dToggle = function () {
 
 /***/ }),
 
+/***/ "./js/lib/modules/handlers.js":
+/*!************************************!*\
+  !*** ./js/lib/modules/handlers.js ***!
+  \************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./js/lib/core.js");
+/* harmony import */ var file_loader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! file-loader */ "../node_modules/file-loader/dist/cjs.js");
+/* harmony import */ var file_loader__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(file_loader__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.on = function (eventName, callbackFunc) {
+  for (var i = 0; i < this.length; i += 1) {
+    if (!this[i].addEventListener || !eventName || !callbackFunc) {
+      return this;
+    }
+
+    this[i].addEventListener(eventName, callbackFunc);
+  }
+
+  return this;
+};
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.off = function (eventName, callbackFunc) {
+  for (var i = 0; i < this.length; i += 1) {
+    if (!this[i].removeEventListener || !eventName || !callbackFunc) {
+      return this;
+    }
+
+    this[i].removeEventListener(eventName, callbackFunc);
+  }
+
+  return this;
+};
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.click = function (callbackFunc) {
+  for (var i = 0; i < this.length; i += 1) {
+    if (!this[i].click || !this[i].addEventListener) {
+      return this;
+    }
+
+    if (callbackFunc) {
+      this[i].addEventListener('click', callbackFunc);
+    } else {
+      this[i].click();
+    }
+  }
+
+  return this;
+};
+
+/***/ }),
+
 /***/ "./js/lib/types/displayTypes.js":
 /*!**************************************!*\
   !*** ./js/lib/types/displayTypes.js ***!
@@ -578,12 +631,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_libMain__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/libMain */ "./js/lib/libMain.js");
 /* eslint-disable no-undef */
 
-
  /// TESTS ///
 
 var action = function action() {
   console.log(this, 'LOX');
 };
+
+var DOMtest = 'прив, чо как дети';
+Object(_lib_libMain__WEBPACK_IMPORTED_MODULE_1__["default"])('div').html(DOMtest);
 
 /***/ }),
 

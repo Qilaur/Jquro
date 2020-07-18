@@ -85,7 +85,7 @@ set attributes to found elements
 $('a').setAttr('download');
  ```   
 
-### .removeAttr(attributeName)
+### .removeAttr( attributeName )
 remove attributes from element
 > 🔧 _**Parameters**_   
 >   * _attributeName_ - name of attribute (also can be an array)    
@@ -99,7 +99,7 @@ remove attributes from element
  $('a').removeAttr('download');
  ```
  ## 🔸 Work with _**listeners**_
- ## .on(eventName, callbackFunction)
+ ### .on( eventName, callbackFunction )
  add event listener to elements (addEventListener)
  > 🔧 _**Parameters**_   
 >   * _eventName_ - name of the event for the listener
@@ -109,7 +109,7 @@ remove attributes from element
  $('div').on('click', switchToRussian);    
  $('div').on('mouseover', makeButtonRed);
  ```
-  ## .off(eventName, callbackFunction)
+### .off( eventName, callbackFunction )
  remove event listener from elements (removeEventListener)
  > 🔧 _**Parameters**_   
 >   * _eventName_ - name of the event for the listener
@@ -119,7 +119,7 @@ remove attributes from element
  $('div').off('click', switchToRussian);    
  $('div').off('mouseover', makeButtonRed);
  ```
- ## .click(callbackFunction)
+ ## .click( callbackFunction )
   set _**click**_ listener to element  (addEventListener('click', randomFunc))
  > 🔧 _**Parameters**_   
 >   * _callbackFunction_ - callback function for the listener   
@@ -128,4 +128,16 @@ remove attributes from element
  ```
  $('div').click(switchToRussian);    
  $('div').click();
+ ```
+## 🔸 Work with _**inner content**_
+### .html( content )
+if __*content*__ exist, change innerHTML of found blocks to content    
+else execute without any parameters, return innerHTML of each element
+> 🔧 _**Parameters**_
+> * _content_ - DOM node or html code (string)
+##### Examples  
+ ```
+ $('div').html('<p>All lives metter</p>')
+ $('div').html(document.querySelector('p'))  
+ $('div').html() 
  ```

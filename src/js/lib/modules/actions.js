@@ -1,36 +1,43 @@
-import $ from '../core';
 import { call } from 'file-loader';
+import $ from '../core';
 
-$.prototype.on = function(eventName, callbackFunc) {
+$.prototype.ForEachConstructor = function (callback, filter) {
   for (let i = 0; i < this.length; i += 1) {
-    if (!this[i].addEventListener || !eventName || !callbackFunc) {
-      return this;
+    if (!filter(this[i])) {
+      continue;
     }
-    this[i].addEventListener(eventName, callbackFunc);
+    callback(this[i]);
   }
-  return this;
 };
 
-$.prototype.off = function(eventName, callbackFunc) {
-  for (let i = 0; i < this.length; i += 1) {
-    if (!this[i].removeEventListener || !eventName || !callbackFunc) {
-      return this;
-    }
-    this[i].removeEventListener(eventName, callbackFunc);
-  }
-  return this;
-};
 
-$.prototype.click = function(callbackFunc) {
-  for (let i = 0; i < this.length; i += 1) {
-    if (!this[i].click || !this[i].addEventListener) {
-      return this;
-    }
-    if (callbackFunc) {
-      this[i].addEventListener('click', callbackFunc);
+// getting HTML of collection
+$.prototype.html = function (content) {
+  this.ForEachConstructor((item) => {
+    if (content) {
+      if (content.innerHTML) {
+        item.innerHTML = content.outerHTML;
+      } else {
+        item.innerHTML = content;
+      }
     } else {
-      this[i].click();
+      return item.innerHTML;
     }
-  }
-  return this;
+    return this;
+  },
+  (item) => {
+    if (item.innerHTML) {
+      return true;
+    }
+    return false;
+  });
 };
+
+// $.prototype.eq = function(property) {
+//   const swap = this[i];
+//   const objLength = Object.keys(this).length;
+
+//   for (let i = 0; i < objLength; i += 1) {
+//     delete this[i];
+//   }
+// };
