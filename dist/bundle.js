@@ -343,9 +343,15 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.setAttr = function (attr
     }
 
     if (Array.isArray(attrName)) {
-      attrName.forEach(function (item) {
-        _this[i].setAttribute(item, attrValue);
-      });
+      if (Array.isArray(attrValue)) {
+        for (var x = 0; x < attrName.length; x += 1) {
+          _this[i].setAttribute(attrName[x], attrValue[x]);
+        }
+      } else {
+        attrName.forEach(function (item) {
+          _this[i].setAttribute(item, attrValue);
+        });
+      }
     } else if (attrValue) {
       _this[i].setAttribute(attrName, attrValue);
     } else {

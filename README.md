@@ -65,12 +65,24 @@ set attributes to found elements
 >   * _attributeValue_ - attribute value   
 > ##### Useful to notice ❗
 > first parameter can be an array   
-> ```$('div').setAttr(['data-source', 'src'], 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');```   
-> That helps to set several attributes to the same value, maybe useful :[
+> ```$('div').setAttr(['data-source', 'src'], 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');```    
+> That helps to set several attributes to the same value    
+> also both parameters can be an array, this allows to set attribute to appropriate value   
+> ```$('div').setAttr(['data-src', 'src', 'data-video-name'], ['youtube', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'check it']);```     
+> _**Result**_:   
+> _before:_
+> ```
+> <div>text</div>
+>``` 
+> _after:_
+> ```
+> <div data-src="youtube" src="https://www.youtube.com/watch?v=dQw4w9WgXcQ" data-video-name="check it">text</div>
+>``` 
 ##### Examples  
  ``` $('div').setAttr('data-source', 'youtube');
  $('div').setAttr(['data-source', 'src'], 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
- $('a').setAttr('download');
+ $('div').setAttr(['data-src', 'src', 'data-video-name'], ['youtube', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'check it']);
+$('a').setAttr('download');
  ```   
 
 ### .removeAttr(attributeName)

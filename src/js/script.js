@@ -8,3 +8,4 @@ import $ from './lib/libMain';
 const action = function() {
   console.log(this, 'LOX');
 };
+
