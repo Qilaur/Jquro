@@ -6,4 +6,3 @@ const action = function() {
   console.log(this, 'LOX');
 };
 $('div').dBlock();
-

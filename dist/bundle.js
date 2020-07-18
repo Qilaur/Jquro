@@ -507,7 +507,11 @@ var action = function action() {
   console.log(this, 'LOX');
 };
 
+<<<<<<< HEAD
 $('div').dBlock();
+=======
+console.log($('div'));
+>>>>>>> f72c99d6749809f20757ef742ecd4525fc0db586
 
 /***/ }),
 
