@@ -7,11 +7,14 @@ $.prototype.d = function (type) {
   for (let i = 0; i < this.length; i += 1) {
     if (displayTypes.indexOf(searchElement) !== -1) {
       if (this[i].style) {
-        this[i].style.display = type === '' ? 'initial' : type;
+        // this[i].style.display = type === '' ? 'initial' : type;
+        this[i].style.display = type;
       }
-      return this;
+    } else {
+      throw new ReferenceError('incorrect display value');
     }
   }
+  return this;
 };
 
 $.prototype.dToggle = function () {

@@ -6,7 +6,7 @@ My library for development
 
 Main variable is $ (like in jQuery)
 ## **$** 
-```$(string)```
+```$( string )```
 >_return **this**, what allow to chain building_   
 **```string```** can be DOM node or DOM selector for querySelector  
 #### Examples
@@ -22,59 +22,36 @@ $('div').addClass('ugly-but-beauty');
 
 ##  🔸Work with _**classes**_
 >all the methods take class as string
-### .addClass(class)
+### .addClass( class )
 add clases to found elements
 ##### Examples  
  ``` $('div').addClass('soCoolBlock'); ```
 
-### .delClass(class)
+### .delClass( class )
 remove clases from found elements
 ##### Examples  
  ``` $('div').delClass('soBoringBlock'); ```
 
-### .toggleClass(class)
+### .toggleClass( class )
 toggle clases from found elements   
 (if element has this class, .toggleClass remove it, else, add class)
 ##### Examples  
  ``` $('div').toggleClass('active'); ```
-### .hasClass(class)
+### .hasClass( class )
 check if elements contains provided class
 ##### Examples  
  ``` $('div').hasClass('tengatine'); ```
 hr   
 ## 🔸 Work with _**display**_
 
-### .dBlock()
-change display to **block**
+### .d( string )
+change display to **received value**
+> 🔧 _**Parameters**_  
+> **_string_** - display property (like a 'flex' or 'block')
 ##### Examples  
- ``` $('div').dBlock(); ```
+ ``` $('div').d('flex'); ```
  
-### .dFlex()
-change display to **flex**
-##### Examples  
- ``` $('div').dFlex(); ```
- 
-### .dInlineBlock()
-change display to **inline-block**
-##### Examples  
- ``` $('div').dInlineBlock(); ```
- 
-### .dInline()
-change display to **inline**
-##### Examples  
- ``` $('div').dInline(); ```
- 
-### .dNone()
-change display to **'none'**
-##### Examples  
- ``` $('div').dNone(); ```
- 
-### .dReset()
-change display to **' '** (empty string, it helps to get premordial property)
-##### Examples  
- ``` $('div').dReset(); ```
- 
-### .dToggle()
+### .dToggle( )
 toggle display property (from *none* to *block* and rather)
 ##### Examples  
  ``` $('div').dToggle(); ```
