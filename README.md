@@ -6,7 +6,7 @@ My library for development
 
 Main variable is $ (like in jQuery)
 ## **$** 
-```$(string)```
+```$( string )```
 >_return **this**, what allow to chain building_   
 **```string```** can be DOM node or DOM selector for querySelector  
 #### Examples
@@ -22,59 +22,36 @@ $('div').addClass('ugly-but-beauty');
 
 ##  🔸Work with _**classes**_
 >all the methods take class as string
-### .addClass(class)
+### .addClass( class )
 add clases to found elements
 ##### Examples  
  ``` $('div').addClass('soCoolBlock'); ```
 
-### .delClass(class)
+### .delClass( class )
 remove clases from found elements
 ##### Examples  
  ``` $('div').delClass('soBoringBlock'); ```
 
-### .toggleClass(class)
+### .toggleClass( class )
 toggle clases from found elements   
 (if element has this class, .toggleClass remove it, else, add class)
 ##### Examples  
  ``` $('div').toggleClass('active'); ```
-### .hasClass(class)
+### .hasClass( class )
 check if elements contains provided class
 ##### Examples  
  ``` $('div').hasClass('tengatine'); ```
 hr   
 ## 🔸 Work with _**display**_
 
-### .dBlock()
-change display to **block**
+### .d( string )
+change display to **received value**
+> 🔧 _**Parameters**_  
+> **_string_** - display property (like a 'flex' or 'block')
 ##### Examples  
- ``` $('div').dBlock(); ```
+ ``` $('div').d('flex'); ```
  
-### .dFlex()
-change display to **flex**
-##### Examples  
- ``` $('div').dFlex(); ```
- 
-### .dInlineBlock()
-change display to **inline-block**
-##### Examples  
- ``` $('div').dInlineBlock(); ```
- 
-### .dInline()
-change display to **inline**
-##### Examples  
- ``` $('div').dInline(); ```
- 
-### .dNone()
-change display to **'none'**
-##### Examples  
- ``` $('div').dNone(); ```
- 
-### .dReset()
-change display to **' '** (empty string, it helps to get premordial property)
-##### Examples  
- ``` $('div').dReset(); ```
- 
-### .dToggle()
+### .dToggle( )
 toggle display property (from *none* to *block* and rather)
 ##### Examples  
  ``` $('div').dToggle(); ```
@@ -88,15 +65,27 @@ set attributes to found elements
 >   * _attributeValue_ - attribute value   
 > ##### Useful to notice ❗
 > first parameter can be an array   
-> ```$('div').setAttr(['data-source', 'src'], 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');```   
-> That helps to set several attributes to the same value, maybe useful :[
+> ```$('div').setAttr(['data-source', 'src'], 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');```    
+> That helps to set several attributes to the same value    
+> also both parameters can be an array, this allows to set attribute to appropriate value   
+> ```$('div').setAttr(['data-src', 'src', 'data-video-name'], ['youtube', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'check it']);```     
+> _**Result**_:   
+> _before:_
+> ```
+> <div>text</div>
+>``` 
+> _after:_
+> ```
+> <div data-src="youtube" src="https://www.youtube.com/watch?v=dQw4w9WgXcQ" data-video-name="check it">text</div>
+>``` 
 ##### Examples  
  ``` $('div').setAttr('data-source', 'youtube');
  $('div').setAttr(['data-source', 'src'], 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
- $('a').setAttr('download');
+ $('div').setAttr(['data-src', 'src', 'data-video-name'], ['youtube', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 'check it']);
+$('a').setAttr('download');
  ```   
 
-### .removeAttr(attributeName)
+### .removeAttr( attributeName )
 remove attributes from element
 > 🔧 _**Parameters**_   
 >   * _attributeName_ - name of attribute (also can be an array)    
@@ -110,7 +99,7 @@ remove attributes from element
  $('a').removeAttr('download');
  ```
  ## 🔸 Work with _**listeners**_
- ## .on(eventName, callbackFunction)
+ ### .on( eventName, callbackFunction )
  add event listener to elements (addEventListener)
  > 🔧 _**Parameters**_   
 >   * _eventName_ - name of the event for the listener
@@ -120,7 +109,7 @@ remove attributes from element
  $('div').on('click', switchToRussian);    
  $('div').on('mouseover', makeButtonRed);
  ```
-  ## .off(eventName, callbackFunction)
+### .off( eventName, callbackFunction )
  remove event listener from elements (removeEventListener)
  > 🔧 _**Parameters**_   
 >   * _eventName_ - name of the event for the listener
@@ -130,7 +119,7 @@ remove attributes from element
  $('div').off('click', switchToRussian);    
  $('div').off('mouseover', makeButtonRed);
  ```
- ## .click(callbackFunction)
+ ## .click( callbackFunction )
   set _**click**_ listener to element  (addEventListener('click', randomFunc))
  > 🔧 _**Parameters**_   
 >   * _callbackFunction_ - callback function for the listener   
@@ -140,3 +129,64 @@ remove attributes from element
  $('div').click(switchToRussian);    
  $('div').click();
  ```
+## 🔸 Work with _**inner content**_
+### .html( content )
+if __*content*__ exist, change innerHTML of found blocks to content    
+else execute without any parameters, return innerHTML of each element
+> 🔧 _**Parameters**_
+> * _content_ - DOM node or html code (string)
+##### Examples  
+ ```
+ $('div').html('<p>All lives metter</p>');    
+ $('div').html(document.querySelector('p'));  
+ $('div').html();   
+ ```
+ ### .eq( index )
+return element by index    
+> 🔧 _**Parameters**_
+> * _index_ - index for the array of the elements
+##### Examples  
+ ```
+ $('div').eq(0); // get the first item in the colletion 
+ $('div').eq(10);
+ $('div').eq(992);
+ ```
+  ### .eq( index )
+return element by index    
+> 🔧 _**Parameters**_
+> * _index_ - index for the array of the elements
+##### Examples  
+ ```
+ $('div').eq(0); // get the first item in the colletion 
+ $('div').eq(10);
+ $('div').eq(992);
+ ```
+### .find( selector )
+takes only one element before dote and find in it suitable for the selector elements   
+Actually it's a querySelector. 
+> 🔧 _**Parameters**_
+> * _selector_ - selector (like in .querySelector() )
+##### Examples  
+ ```
+ $('div.cola').find('.active'); // return all .active blocks in the div with class 'cola'
+ $('ul').find('a');
+ $('nav.menu').find('.about-us');
+ ```
+### .childIndex(  )
+return the index of an element in its parent (what is this element in a row)   
+
+##### Examples  
+ ```
+ $('div.cola').childIndex() // return 0 if element first in its parent
+ ```
+### .closest( selector )
+alternative to native js .closest()  
+if closest element wasnt found, delete it,    return list of closest elements
+> 🔧 _**Parameters**_
+> * _selector_ - selector (like in .closest() )
+##### Examples  
+ ```
+ $('div.cola a').closest('div.cola') // return div.cola
+ $('div.cola a').closest('nav') // if 'div.cola a' hasn't nav parent, delete element from list
+ ```
+

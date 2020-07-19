@@ -19,50 +19,15 @@ $.prototype.dBlock = function() {
 
 $.prototype.dFlex = function() {
   for (let i = 0; i < this.length; i += 1) {
-    if (!this[i].style.display) {
-      continue;
-    }
-    this[i].style.display = 'flex';
-  }
-  return this;
-};
-
-$.prototype.dInlineBlock = function() {
-  for (let i = 0; i < this.length; i += 1) {
-    if (!this[i].style.display) {
-      continue;
-    }
-    this[i].style.display = 'inline-block';
-  }
-  return this;
-};
-
-$.prototype.dInline = function() {
-  for (let i = 0; i < this.length; i += 1) {
-    if (!this[i].style.display) {
-      continue;
-    }
-    this[i].style.display = 'inline';
-  }
-  return this;
-};
-
-$.prototype.dNone = function() {
-  for (let i = 0; i < this.length; i += 1) {
-    if (!this[i].style.display) {
-      continue;
+    if (displayTypes.indexOf(searchElement) !== -1) {
+      if (this[i].style) {
+        // this[i].style.display = type === '' ? 'initial' : type;
+        this[i].style.display = type;
+      }
+    } else {
+      throw new ReferenceError('incorrect display value');
     }
     this[i].style.display = 'none';
-  }
-  return this;
-};
-
-$.prototype.dReset = function() {
-  for (let i = 0; i < this.length; i += 1) {
-    if (!this[i].style.display) {
-      continue;
-    }
-    this[i].style.display = '';
   }
   return this;
 };

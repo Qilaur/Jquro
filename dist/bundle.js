@@ -244,10 +244,11 @@ window.$ = $;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core */ "./js/lib/core.js");
 /* harmony import */ var _modules_display__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/display */ "./js/lib/modules/display.js");
-/* harmony import */ var _modules_display__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_modules_display__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _modules_classes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/classes */ "./js/lib/modules/classes.js");
-/* harmony import */ var _modules_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/actions */ "./js/lib/modules/actions.js");
-/* harmony import */ var _modules_attributes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/attributes */ "./js/lib/modules/attributes.js");
+/* harmony import */ var _modules_attributes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/attributes */ "./js/lib/modules/attributes.js");
+/* harmony import */ var _modules_handlers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/handlers */ "./js/lib/modules/handlers.js");
+/* harmony import */ var _modules_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/actions */ "./js/lib/modules/actions.js");
+
 
 
 
@@ -266,47 +267,129 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./js/lib/core.js");
-/* harmony import */ var file_loader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! file-loader */ "../node_modules/file-loader/dist/cjs.js");
-/* harmony import */ var file_loader__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(file_loader__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var file_loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! file-loader */ "../node_modules/file-loader/dist/cjs.js");
+/* harmony import */ var file_loader__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(file_loader__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core */ "./js/lib/core.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
 
-_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.on = function (eventName, callbackFunc) {
+
+_core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.ForEachConstructor = function (callback, filter) {
   for (var i = 0; i < this.length; i += 1) {
-    if (!this[i].addEventListener || !eventName || !callbackFunc) {
-      return this;
+    if (!filter(this[i])) {
+      continue;
     }
 
-    this[i].addEventListener(eventName, callbackFunc);
+    callback(this[i]);
   }
+}; // getting HTML of collection
 
-  return this;
-};
 
-_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.off = function (eventName, callbackFunc) {
-  for (var i = 0; i < this.length; i += 1) {
-    if (!this[i].removeEventListener || !eventName || !callbackFunc) {
-      return this;
-    }
+_core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.html = function (content) {
+  var _this = this;
 
-    this[i].removeEventListener(eventName, callbackFunc);
-  }
-
-  return this;
-};
-
-_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.click = function (callbackFunc) {
-  for (var i = 0; i < this.length; i += 1) {
-    if (!this[i].click || !this[i].addEventListener) {
-      return this;
-    }
-
-    if (callbackFunc) {
-      this[i].addEventListener('click', callbackFunc);
+  this.ForEachConstructor(function (item) {
+    if (content) {
+      if (content.innerHTML) {
+        item.innerHTML = content.outerHTML;
+      } else {
+        item.innerHTML = content;
+      }
     } else {
-      this[i].click();
+      return item.innerHTML;
     }
+
+    return _this;
+  }, function (item) {
+    return item.innerHTML;
+  });
+};
+
+_core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.eq = function (property) {
+  var swap = this[property];
+  var objLength = Object.keys(this).length;
+
+  for (var i = 0; i < objLength; i += 1) {
+    delete this[i];
+  }
+
+  this[0] = swap;
+  this.length = 1;
+  console.log(this);
+  return this;
+}; // find index of element in the parent node
+
+
+_core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.childIndex = function () {
+  var _this2 = this;
+
+  var parent = this[0].parentNode;
+
+  var children = _toConsumableArray(parent.children);
+
+  var findMyIndex = function findMyIndex(item) {
+    return item === _this2[0];
+  };
+
+  return children.findIndex(findMyIndex);
+};
+
+_core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.find = function (selector) {
+  var correctItemsCount = 0;
+  var copiedObj = Object.assign({}, this);
+
+  for (var i = 0; i < copiedObj.length; i += 1) {
+    var arr = copiedObj[i].querySelectorAll(selector);
+
+    if (arr.length === 0) {
+      continue;
+    }
+
+    for (var j = 0; j < arr.length; j += 1) {
+      this[j] = arr[j];
+    }
+
+    correctItemsCount += arr.length;
+  }
+
+  this.length = correctItemsCount;
+  var objLength = Object.keys(this).length;
+
+  for (; correctItemsCount < objLength; correctItemsCount += 1) {
+    delete this[correctItemsCount];
+  }
+
+  return this;
+};
+
+_core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.closest = function (selector) {
+  var counter = 0;
+
+  for (var i = 0; i < this.length; i++) {
+    if (this[i].closest(selector) !== null) {
+      this[counter] = this[i].closest(selector);
+      counter++;
+    } else {
+      delete this[i];
+    }
+  }
+
+  this.length = counter;
+  var objLength = Object.keys(this).length;
+
+  for (; counter < objLength; counter += 1) {
+    delete this[counter];
   }
 
   return this;
@@ -344,9 +427,15 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.setAttr = function (attr
     }
 
     if (Array.isArray(attrName)) {
-      attrName.forEach(function (item) {
-        _this[i].setAttribute(item, attrValue);
-      });
+      if (Array.isArray(attrValue)) {
+        for (var x = 0; x < attrName.length; x += 1) {
+          _this[i].setAttribute(attrName[x], attrValue[x]);
+        }
+      } else {
+        attrName.forEach(function (item) {
+          _this[i].setAttribute(item, attrValue);
+        });
+      }
     } else if (attrValue) {
       _this[i].setAttribute(attrName, attrValue);
     } else {
@@ -383,6 +472,10 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.removeAttr = function (a
         v: _this2
       };
     }
+  };
+
+  for (var i = 0; i < this.length; i += 1) {
+    var _ret2 = _loop2(i);
 
     if (Array.isArray(attrName)) {
       attrName.forEach(function (item) {
@@ -480,10 +573,138 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.hasClass = function (Use
 /*!***********************************!*\
   !*** ./js/lib/modules/display.js ***!
   \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./js/lib/core.js");
+/* harmony import */ var _types_displayTypes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types/displayTypes */ "./js/lib/types/displayTypes.js");
+
+
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.d = function (type) {
+  var searchElement = type.toLowerCase().replace(' ', '');
+
+  for (var i = 0; i < this.length; i += 1) {
+    if (_types_displayTypes__WEBPACK_IMPORTED_MODULE_1__["default"].indexOf(searchElement) !== -1) {
+      if (this[i].style) {
+        // this[i].style.display = type === '' ? 'initial' : type;
+        this[i].style.display = type;
+      }
+    } else {
+      throw new ReferenceError('incorrect display value');
+    }
+  }
+
+  return this;
+};
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.dToggle = function () {
+  for (var i = 0; i < this.length; i += 1) {
+    if (!this[i].style) {
+      continue;
+    }
+
+    if (this[i].style.display === 'none') {
+      this[i].style.display = ''; // reboot display
+
+      if (window.getComputedStyle(this[i]).display === 'none') {
+        this[i].style.display = 'block'; // if display was none toggle it to block
+      }
+    } else {
+      this[i].style.display = 'none';
+    }
+  }
+
+  return this;
+};
+
+/***/ }),
+
+/***/ "./js/lib/modules/handlers.js":
+/*!************************************!*\
+  !*** ./js/lib/modules/handlers.js ***!
+  \************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./js/lib/core.js");
+/* harmony import */ var file_loader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! file-loader */ "../node_modules/file-loader/dist/cjs.js");
+/* harmony import */ var file_loader__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(file_loader__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.on = function (eventName, callbackFunc) {
+  for (var i = 0; i < this.length; i += 1) {
+    if (!this[i].addEventListener || !eventName || !callbackFunc) {
+      return this;
+    }
+
+    this[i].addEventListener(eventName, callbackFunc);
+  }
+
+  return this;
+};
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.off = function (eventName, callbackFunc) {
+  for (var i = 0; i < this.length; i += 1) {
+    if (!this[i].removeEventListener || !eventName || !callbackFunc) {
+      return this;
+    }
+
+    this[i].removeEventListener(eventName, callbackFunc);
+  }
+
+  return this;
+};
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.click = function (callbackFunc) {
+  for (var i = 0; i < this.length; i += 1) {
+    if (!this[i].click || !this[i].addEventListener) {
+      return this;
+    }
+
+    if (callbackFunc) {
+      this[i].addEventListener('click', callbackFunc);
+    } else {
+      this[i].click();
+    }
+  }
 
 throw new Error("Module build failed (from ../node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\src\\js\\lib\\modules\\display.js: Unsyntactic continue (5:4)\n\n\u001b[0m \u001b[90m 3 | \u001b[39m\u001b[36mconst\u001b[39m validateElements \u001b[33m=\u001b[39m (element\u001b[33m,\u001b[39m firstValid\u001b[33m,\u001b[39m secondValid\u001b[33m,\u001b[39m thirdValid) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 4 | \u001b[39m  \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39melement[firstValid]) {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 5 | \u001b[39m    \u001b[36mcontinue\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m   | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 6 | \u001b[39m  } \u001b[36melse\u001b[39m \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39melement[firstValid][secondValid] ) {\u001b[0m\n\u001b[0m \u001b[90m 7 | \u001b[39m    \u001b[36mcontinue\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 8 | \u001b[39m  } \u001b[36melse\u001b[39m \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39melement[firstValid][secondValid][thirdValid] ) {\u001b[0m\n    at Parser._raise (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:742:17)\n    at Parser.raiseWithData (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:735:17)\n    at Parser.raise (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:729:17)\n    at Parser.verifyBreakContinue (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11361:12)\n    at Parser.parseBreakContinueStatement (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11343:10)\n    at Parser.parseStatementContent (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11120:21)\n    at Parser.parseStatement (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11104:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11679:25)\n    at Parser.parseBlockBody (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11665:10)\n    at Parser.parseBlock (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11649:10)\n    at Parser.parseStatementContent (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11180:21)\n    at Parser.parseStatement (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11104:17)\n    at Parser.parseIfStatement (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11456:28)\n    at Parser.parseStatementContent (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11149:21)\n    at Parser.parseStatement (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11104:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11679:25)\n    at Parser.parseBlockBody (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11665:10)\n    at Parser.parseBlock (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11649:10)\n    at Parser.parseFunctionBody (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:10656:24)\n    at Parser.parseArrowExpression (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:10625:10)\n    at Parser.parseParenAndDistinguishExpression (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:10243:12)\n    at Parser.parseExprAtom (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:9969:21)\n    at Parser.parseExprSubscripts (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:9624:23)\n    at Parser.parseMaybeUnary (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:9604:21)\n    at Parser.parseExprOps (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:9474:23)\n    at Parser.parseMaybeConditional (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:9447:23)\n    at Parser.parseMaybeAssign (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:9402:21)\n    at Parser.parseVar (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11763:26)\n    at Parser.parseVarStatement (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11572:10)\n    at Parser.parseStatementContent (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11171:21)\n    at Parser.parseStatement (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11104:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11679:25)\n    at Parser.parseBlockBody (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11665:10)\n    at Parser.parseTopLevel (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11035:10)\n    at Parser.parse (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:12671:10)\n    at parse (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:12722:38)");
+
+/***/ }),
+
+/***/ "./js/lib/types/displayTypes.js":
+/*!**************************************!*\
+  !*** ./js/lib/types/displayTypes.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var displayTypes = [
+/* <display-outside> values */
+'block', 'inline', 'run-in',
+/* <display-inside> values */
+'flow', 'flow-root', 'table', 'flex', 'grid', 'ruby',
+/* <display-outside> plus <display-inside> values */
+'block flow', 'inline table', 'flex run-in',
+/* <display-listitem> values */
+'list-item', 'list-item block', 'list-item inline', 'list-item flow', 'list-item flow-root', 'list-item block flow', 'list-item block flow-root', 'flow list-item block',
+/* <display-internal> values */
+'table-row-group', 'table-header-group', 'table-footer-group', 'table-row', 'table-cell', 'table-column-group', 'table-column', 'table-caption', 'ruby-base', 'ruby-text', 'ruby-base-container', 'ruby-text-container',
+/* <display-box> values */
+'contents', 'none',
+/* <display-legacy> values */
+'inline-block', 'inline-table', 'inline-flex', 'inline-grid',
+/* Global values */
+'inherit', 'initial', 'unset'];
+/* harmony default export */ __webpack_exports__["default"] = (displayTypes);
 
 /***/ }),
 
@@ -501,17 +722,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_libMain__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/libMain */ "./js/lib/libMain.js");
 /* eslint-disable no-undef */
 
-
+ /// TESTS ///
 
 var action = function action() {
   console.log(this, 'LOX');
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $('div').dBlock();
 =======
 console.log($('div'));
 >>>>>>> f72c99d6749809f20757ef742ecd4525fc0db586
+=======
+console.log(Object(_lib_libMain__WEBPACK_IMPORTED_MODULE_1__["default"])('.main-block').closest('.test').addClass('active'));
+>>>>>>> origin/master
 
 /***/ }),
 

@@ -1,8 +1,10 @@
 /* eslint-disable no-undef */
 import '../assets/css/styles.scss';
-import './lib/libMain';
+import $ from './lib/libMain';
 
-const action = function() {
+/// TESTS ///
+
+const action = function () {
   console.log(this, 'LOX');
 };
-$('div').dBlock();
+console.log($('.main-block').closest('.test').addClass('active'));

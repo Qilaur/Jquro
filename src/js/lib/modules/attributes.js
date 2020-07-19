@@ -10,9 +10,15 @@ $.prototype.setAttr = function (attrName, attrValue) {
       return this;
     }
     if (Array.isArray(attrName)) {
-      attrName.forEach((item) => {
-        this[i].setAttribute(item, attrValue);
-      });
+      if (Array.isArray(attrValue)) {
+        for (let x = 0; x < attrName.length; x += 1) {
+          this[i].setAttribute(attrName[x], attrValue[x]);
+        }
+      } else {
+        attrName.forEach((item) => {
+          this[i].setAttribute(item, attrValue);
+        });
+      }
     } else if (attrValue) {
       this[i].setAttribute(attrName, attrValue);
     } else {
