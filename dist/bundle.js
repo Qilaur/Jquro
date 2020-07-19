@@ -270,6 +270,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var file_loader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! file-loader */ "../node_modules/file-loader/dist/cjs.js");
 /* harmony import */ var file_loader__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(file_loader__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../core */ "./js/lib/core.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 
 
@@ -281,7 +293,8 @@ _core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.ForEachConstructor = fun
 
     callback(this[i]);
   }
-};
+}; // getting HTML of collection
+
 
 _core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.html = function (content) {
   var _this = this;
@@ -289,7 +302,7 @@ _core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.html = function (content
   this.ForEachConstructor(function (item) {
     if (content) {
       if (content.innerHTML) {
-        item.innerHTML = content.innerHTML;
+        item.innerHTML = content.outerHTML;
       } else {
         item.innerHTML = content;
       }
@@ -299,12 +312,87 @@ _core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.html = function (content
 
     return _this;
   }, function (item) {
-    if (item.innerHTML) {
-      return true;
+    return item.innerHTML;
+  });
+};
+
+_core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.eq = function (property) {
+  var swap = this[property];
+  var objLength = Object.keys(this).length;
+
+  for (var i = 0; i < objLength; i += 1) {
+    delete this[i];
+  }
+
+  this[0] = swap;
+  this.length = 1;
+  console.log(this);
+  return this;
+}; // find index of element in the parent node
+
+
+_core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.childIndex = function () {
+  var _this2 = this;
+
+  var parent = this[0].parentNode;
+
+  var children = _toConsumableArray(parent.children);
+
+  var findMyIndex = function findMyIndex(item) {
+    return item === _this2[0];
+  };
+
+  return children.findIndex(findMyIndex);
+};
+
+_core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.find = function (selector) {
+  var correctItemsCount = 0;
+  var copiedObj = Object.assign({}, this);
+
+  for (var i = 0; i < copiedObj.length; i += 1) {
+    var arr = copiedObj[i].querySelectorAll(selector);
+
+    if (arr.length === 0) {
+      continue;
     }
 
-    return false;
-  });
+    for (var j = 0; j < arr.length; j += 1) {
+      this[j] = arr[j];
+    }
+
+    correctItemsCount += arr.length;
+  }
+
+  this.length = correctItemsCount;
+  var objLength = Object.keys(this).length;
+
+  for (; correctItemsCount < objLength; correctItemsCount += 1) {
+    delete this[correctItemsCount];
+  }
+
+  return this;
+};
+
+_core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.closest = function (selector) {
+  var counter = 0;
+
+  for (var i = 0; i < this.length; i++) {
+    if (this[i].closest(selector) !== null) {
+      this[counter] = this[i].closest(selector);
+      counter++;
+    } else {
+      delete this[i];
+    }
+  }
+
+  this.length = counter;
+  var objLength = Object.keys(this).length;
+
+  for (; counter < objLength; counter += 1) {
+    delete this[counter];
+  }
+
+  return this;
 };
 
 /***/ }),
@@ -637,8 +725,7 @@ var action = function action() {
   console.log(this, 'LOX');
 };
 
-var DOMtest = 'прив, чо как дети';
-Object(_lib_libMain__WEBPACK_IMPORTED_MODULE_1__["default"])('div').html(DOMtest);
+console.log(Object(_lib_libMain__WEBPACK_IMPORTED_MODULE_1__["default"])('.main-block').closest('.test').addClass('active'));
 
 /***/ }),
 

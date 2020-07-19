@@ -137,7 +137,56 @@ else execute without any parameters, return innerHTML of each element
 > * _content_ - DOM node or html code (string)
 ##### Examples  
  ```
- $('div').html('<p>All lives metter</p>')
- $('div').html(document.querySelector('p'))  
- $('div').html() 
+ $('div').html('<p>All lives metter</p>');    
+ $('div').html(document.querySelector('p'));  
+ $('div').html();   
  ```
+ ### .eq( index )
+return element by index    
+> 🔧 _**Parameters**_
+> * _index_ - index for the array of the elements
+##### Examples  
+ ```
+ $('div').eq(0); // get the first item in the colletion 
+ $('div').eq(10);
+ $('div').eq(992);
+ ```
+  ### .eq( index )
+return element by index    
+> 🔧 _**Parameters**_
+> * _index_ - index for the array of the elements
+##### Examples  
+ ```
+ $('div').eq(0); // get the first item in the colletion 
+ $('div').eq(10);
+ $('div').eq(992);
+ ```
+### .find( selector )
+takes only one element before dote and find in it suitable for the selector elements   
+Actually it's a querySelector. 
+> 🔧 _**Parameters**_
+> * _selector_ - selector (like in .querySelector() )
+##### Examples  
+ ```
+ $('div.cola').find('.active'); // return all .active blocks in the div with class 'cola'
+ $('ul').find('a');
+ $('nav.menu').find('.about-us');
+ ```
+### .childIndex(  )
+return the index of an element in its parent (what is this element in a row)   
+
+##### Examples  
+ ```
+ $('div.cola').childIndex() // return 0 if element first in its parent
+ ```
+### .closest( selector )
+alternative to native js .closest()  
+if closest element wasnt found, delete it,    return list of closest elements
+> 🔧 _**Parameters**_
+> * _selector_ - selector (like in .closest() )
+##### Examples  
+ ```
+ $('div.cola a').closest('div.cola') // return div.cola
+ $('div.cola a').closest('nav') // if 'div.cola a' hasn't nav parent, delete element from list
+ ```
+
