@@ -93,4 +93,3 @@ $.prototype.closest = function(selector) {
 
   return this;
 };
-

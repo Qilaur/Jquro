@@ -1,38 +1,21 @@
 import $ from '../core';
+import displayTypes from '../types/displayTypes';
 
-const validateElements = (element, firstValid, secondValid, thirdValid) => {
-  if (!element[firstValid]) {
-    continue;
-  } else if (!element[firstValid][secondValid] ) {
-    continue;
-  } else if (!element[firstValid][secondValid][thirdValid] ) {
-    continue;
-  }
-}
-$.prototype.dBlock = function() {
-  for (let i = 0; i < this.length; i += 1) {
-    validateElements(this[i], 'style', 'display');
-    this[i].style.display = 'block';
-  }
-  return this;
-};
-
-$.prototype.dFlex = function() {
+$.prototype.d = function (type) {
+  const searchElement = type.toLowerCase().replace(' ', '');
   for (let i = 0; i < this.length; i += 1) {
     if (displayTypes.indexOf(searchElement) !== -1) {
       if (this[i].style) {
-        // this[i].style.display = type === '' ? 'initial' : type;
         this[i].style.display = type;
       }
     } else {
-      throw new ReferenceError('incorrect display value');
+      throw new Error('incorrect data property');
     }
-    this[i].style.display = 'none';
   }
   return this;
 };
 
-$.prototype.dToggle = function() {
+$.prototype.dToggle = function () {
   for (let i = 0; i < this.length; i += 1) {
     if (!this[i].style.display) {
       continue;

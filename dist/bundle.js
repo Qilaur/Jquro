@@ -472,10 +472,6 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.removeAttr = function (a
         v: _this2
       };
     }
-  };
-
-  for (var i = 0; i < this.length; i += 1) {
-    var _ret2 = _loop2(i);
 
     if (Array.isArray(attrName)) {
       attrName.forEach(function (item) {
@@ -589,11 +585,10 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.d = function (type) {
   for (var i = 0; i < this.length; i += 1) {
     if (_types_displayTypes__WEBPACK_IMPORTED_MODULE_1__["default"].indexOf(searchElement) !== -1) {
       if (this[i].style) {
-        // this[i].style.display = type === '' ? 'initial' : type;
         this[i].style.display = type;
       }
     } else {
-      throw new ReferenceError('incorrect display value');
+      throw new Error("incorrect data property");
     }
   }
 
@@ -602,12 +597,14 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.d = function (type) {
 
 _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.dToggle = function () {
   for (var i = 0; i < this.length; i += 1) {
-    if (!this[i].style) {
+    if (!this[i].style.display) {
       continue;
     }
 
     if (this[i].style.display === 'none') {
       this[i].style.display = ''; // reboot display
+
+      console.log(this[i].style.display);
 
       if (window.getComputedStyle(this[i]).display === 'none') {
         this[i].style.display = 'block'; // if display was none toggle it to block
@@ -674,7 +671,8 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.click = function (callba
     }
   }
 
-throw new Error("Module build failed (from ../node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\src\\js\\lib\\modules\\display.js: Unsyntactic continue (5:4)\n\n\u001b[0m \u001b[90m 3 | \u001b[39m\u001b[36mconst\u001b[39m validateElements \u001b[33m=\u001b[39m (element\u001b[33m,\u001b[39m firstValid\u001b[33m,\u001b[39m secondValid\u001b[33m,\u001b[39m thirdValid) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 4 | \u001b[39m  \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39melement[firstValid]) {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 5 | \u001b[39m    \u001b[36mcontinue\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m   | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 6 | \u001b[39m  } \u001b[36melse\u001b[39m \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39melement[firstValid][secondValid] ) {\u001b[0m\n\u001b[0m \u001b[90m 7 | \u001b[39m    \u001b[36mcontinue\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 8 | \u001b[39m  } \u001b[36melse\u001b[39m \u001b[36mif\u001b[39m (\u001b[33m!\u001b[39melement[firstValid][secondValid][thirdValid] ) {\u001b[0m\n    at Parser._raise (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:742:17)\n    at Parser.raiseWithData (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:735:17)\n    at Parser.raise (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:729:17)\n    at Parser.verifyBreakContinue (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11361:12)\n    at Parser.parseBreakContinueStatement (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11343:10)\n    at Parser.parseStatementContent (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11120:21)\n    at Parser.parseStatement (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11104:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11679:25)\n    at Parser.parseBlockBody (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11665:10)\n    at Parser.parseBlock (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11649:10)\n    at Parser.parseStatementContent (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11180:21)\n    at Parser.parseStatement (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11104:17)\n    at Parser.parseIfStatement (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11456:28)\n    at Parser.parseStatementContent (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11149:21)\n    at Parser.parseStatement (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11104:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11679:25)\n    at Parser.parseBlockBody (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11665:10)\n    at Parser.parseBlock (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11649:10)\n    at Parser.parseFunctionBody (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:10656:24)\n    at Parser.parseArrowExpression (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:10625:10)\n    at Parser.parseParenAndDistinguishExpression (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:10243:12)\n    at Parser.parseExprAtom (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:9969:21)\n    at Parser.parseExprSubscripts (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:9624:23)\n    at Parser.parseMaybeUnary (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:9604:21)\n    at Parser.parseExprOps (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:9474:23)\n    at Parser.parseMaybeConditional (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:9447:23)\n    at Parser.parseMaybeAssign (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:9402:21)\n    at Parser.parseVar (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11763:26)\n    at Parser.parseVarStatement (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11572:10)\n    at Parser.parseStatementContent (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11171:21)\n    at Parser.parseStatement (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11104:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11679:25)\n    at Parser.parseBlockBody (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11665:10)\n    at Parser.parseTopLevel (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:11035:10)\n    at Parser.parse (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:12671:10)\n    at parse (C:\\Users\\Qilau\\Desktop\\JS[0]\\page004\\node_modules\\@babel\\parser\\lib\\index.js:12722:38)");
+  return this;
+};
 
 /***/ }),
 
@@ -728,15 +726,7 @@ var action = function action() {
   console.log(this, 'LOX');
 };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-$('div').dBlock();
-=======
-console.log($('div'));
->>>>>>> f72c99d6749809f20757ef742ecd4525fc0db586
-=======
-console.log(Object(_lib_libMain__WEBPACK_IMPORTED_MODULE_1__["default"])('.main-block').closest('.test').addClass('active'));
->>>>>>> origin/master
+console.log(Object(_lib_libMain__WEBPACK_IMPORTED_MODULE_1__["default"])('.main-block').closest('.test').d('flex'));
 
 /***/ }),
 
