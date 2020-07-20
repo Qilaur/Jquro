@@ -291,7 +291,7 @@ _core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.ForEachConstructor = fun
       continue;
     }
 
-    callback(this[i]);
+    callback(i);
   }
 }; // getting HTML of collection
 
@@ -299,15 +299,15 @@ _core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.ForEachConstructor = fun
 _core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.html = function (content) {
   var _this = this;
 
-  this.ForEachConstructor(function (item) {
+  this.ForEachConstructor(function (iterator) {
     if (content) {
       if (content.innerHTML) {
-        item.innerHTML = content.outerHTML;
+        _this[iterator].innerHTML = content.outerHTML;
       } else {
-        item.innerHTML = content;
+        _this[iterator].innerHTML = content;
       }
     } else {
-      return item.innerHTML;
+      return _this[iterator].innerHTML;
     }
 
     return _this;
@@ -392,6 +392,29 @@ _core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.closest = function (sele
     delete this[counter];
   }
 
+  return this;
+};
+
+_core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.neighbours = function () {
+  var _this3 = this;
+
+  this.ForEachConstructor(function (i) {
+    var parent = _this3[i].parentNode;
+
+    var children = _toConsumableArray(parent.children);
+
+    var currentIndex = children.indexOf(_this3[i]);
+    children.splice(currentIndex, 1);
+
+    if (_this3.length <= 1) {
+      delete _this3[0];
+      Object.assign(_this3, _toConsumableArray(children));
+    } else {
+      _this3[i] = children;
+    }
+  }, function (item) {
+    return item.parentNode;
+  });
   return this;
 };
 
@@ -588,7 +611,7 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.d = function (type) {
         this[i].style.display = type;
       }
     } else {
-      throw new Error("incorrect data property");
+      throw new Error('incorrect data property');
     }
   }
 
@@ -726,7 +749,7 @@ var action = function action() {
   console.log(this, 'LOX');
 };
 
-console.log(Object(_lib_libMain__WEBPACK_IMPORTED_MODULE_1__["default"])('.main-block').closest('.test').d('flex'));
+console.log(Object(_lib_libMain__WEBPACK_IMPORTED_MODULE_1__["default"])('.main-block').neighbours());
 
 /***/ }),
 

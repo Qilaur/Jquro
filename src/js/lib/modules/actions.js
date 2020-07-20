@@ -6,21 +6,21 @@ $.prototype.ForEachConstructor = function (callback, filter) {
     if (!filter(this[i])) {
       continue;
     }
-    callback(this[i]);
+    callback(i);
   }
 };
 
 // getting HTML of collection
 $.prototype.html = function (content) {
-  this.ForEachConstructor((item) => {
+  this.ForEachConstructor((iterator) => {
     if (content) {
       if (content.innerHTML) {
-        item.innerHTML = content.outerHTML;
+        this[iterator].innerHTML = content.outerHTML;
       } else {
-        item.innerHTML = content;
+        this[iterator].innerHTML = content;
       }
     } else {
-      return item.innerHTML;
+      return this[iterator].innerHTML;
     }
     return this;
   },
@@ -91,5 +91,21 @@ $.prototype.closest = function(selector) {
     delete this[counter];
   }
 
+  return this;
+};
+
+$.prototype.neighbours = function() {
+  this.ForEachConstructor((i) => {
+    const parent = this[i].parentNode;
+    const children = [...parent.children];
+    const currentIndex = children.indexOf(this[i]);
+    children.splice(currentIndex, 1);
+    if (this.length <= 1) {
+      delete this[0];
+      Object.assign(this, [...children]);
+    } else {
+      this[i] = children;
+    }
+  }, (item) => item.parentNode);
   return this;
 };

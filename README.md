@@ -151,16 +151,7 @@ return element by index
  $('div').eq(10);
  $('div').eq(992);
  ```
-  ### .eq( index )
-return element by index    
-> 🔧 _**Parameters**_
-> * _index_ - index for the array of the elements
-##### Examples  
- ```
- $('div').eq(0); // get the first item in the colletion 
- $('div').eq(10);
- $('div').eq(992);
- ```
+
 ### .find( selector )
 takes only one element before dote and find in it suitable for the selector elements   
 Actually it's a querySelector. 
@@ -189,4 +180,24 @@ if closest element wasnt found, delete it,    return list of closest elements
  $('div.cola a').closest('div.cola') // return div.cola
  $('div.cola a').closest('nav') // if 'div.cola a' hasn't nav parent, delete element from list
  ```
+## 🔸 Work with _**outer content**_
+### .neighbours(  )
+return all the neighbours of found elements( by $() )   
+if you have 1 element in colletion this method return collection of its neighbours   
+else you have a greater than 1 element, each of elements in collection replaced with collection of its neighbours, in the end you'll get the collection of arrays
+
+##### Examples  
+ ```
+ $('nav a').neighbours(); // return the collection of the arrays of the neighbours for each of 'a' in nav
+ $('ul li.active').neighbours(); // return all of the neighbours of active li
+
+ ```
+> ##### Useful to notice ❗
+> this method helps work with sliders.   
+> For example:     
+> You need to hide all the elements in the block except active    
+> You can make it like this:
+>``` 
+>  $('.slide.active').neighbours().d('none');
+>```
 

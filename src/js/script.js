@@ -7,4 +7,4 @@ import $ from './lib/libMain';
 const action = function () {
   console.log(this, 'LOX');
 };
-console.log($('.main-block').closest('.test').d('flex'));
+console.log($('.main-block').neighbours());
