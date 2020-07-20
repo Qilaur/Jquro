@@ -303,31 +303,129 @@ template {
 [hidden] {
   display: none; }
 
-.main-block {
-  display: block;
-  max-width: 100px;
-  max-height: 100px;
-  background-color: red;
+@font-face {
+  font-family: "Montserrat";
+  src: url(fonts/3220cdd4dbb981ac08822f428d3ea1ed.eot);
+  src: url(fonts/3220cdd4dbb981ac08822f428d3ea1ed.eot?#iefix) format("embedded-opentype"), url(fonts/3db65dc4b858f0fed4fb155f8a5ecab9.woff) format("woff"), url(fonts/8b56391ed36ea95337c6fb0a0c3f309f.woff2) format("woff"), url(fonts/317b418ed317e258b17318b4a4c0335e.ttf) format("truetype");
+  font-style: normal;
+  font-weight: normal; }
+
+@font-face {
+  font-family: "MontserratBold";
+  src: url(fonts/4b33f3d37c06db49a761e440c56de170.eot);
+  src: url(fonts/4b33f3d37c06db49a761e440c56de170.eot?#iefix) format("embedded-opentype"), url(fonts/180ba33d8de7dcfe80a0077be8708630.woff) format("woff"), url(fonts/cfceaf4e74789fc9df24cb0fcafa29dd.woff2) format("woff"), url(fonts/5885feb264991825e67f6bdda2b67c3b.ttf) format("truetype");
+  font-style: normal;
+  font-weight: normal; }
+
+@font-face {
+  font-family: "MontserratItalic";
+  src: url(fonts/9d8693d311414ef85708f2dbb5a7876a.woff) format("woff"), url(fonts/f2932d92a15919302fe56a51a1932b88.woff2) format("woff"), url(fonts/ec9cfd75203f4203b336ffb2a3495846.ttf) format("truetype");
+  font-style: normal;
+  font-weight: normal; }
+
+@font-face {
+  font-family: "Montserrat";
+  src: url(fonts/8067c90c2a63c2ea3f417ab099791527.eot);
+  src: url(fonts/8067c90c2a63c2ea3f417ab099791527.eot?#iefix) format("embedded-opentype"), url(fonts/446ea183ab98a6fd08d6fc8f5d038505.woff) format("woff"), url(fonts/5fa2688acb19e6dcac7a8ec31d9b9eca.woff2) format("woff"), url(fonts/555f03e263bcbecefef3d8c69cdd6e76.ttf) format("truetype");
+  font-style: normal;
+  font-weight: normal; }
+
+.body {
+  background-color: #f4ffd4; }
+
+.container {
+  text-align: center;
+  font-family: 'Montserrat', serif;
+  padding: 20px 10%;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.459); }
+
+.main-header {
+  text-align: center;
+  font-weight: bold;
+  text-align: center;
   color: #fff;
-  font-size: 40px; }
+  padding: 20px 20px;
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 50px;
+  background-color: #665c7f;
+  border-radius: 5px;
+  border-bottom: 10px solid #4c3e70;
+  border-right: 4px solid #4c3e70; }
 
-.beauty {
-  font-size: 50px;
-  background-color: #b94242;
-  text-align: center; }
-
-.button {
-  background-color: #dacd60;
-  color: #000;
-  font-size: 20px;
+nav {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  margin-bottom: 10px;
   padding: 20px; }
+  nav:first-child {
+    border-radius: 5px 0 0 5px; }
+  nav:last-child {
+    border-radius: 5px 0 0 5px; }
 
-.active {
-  color: red;
-  font-size: 50px; }
+.about-link {
+  text-align: center;
+  text-decoration: none;
+  width: 20%;
+  color: #fff;
+  font-size: 20px;
+  border-right: 1px solid #4c3f69;
+  background-color: #665c7f;
+  border-bottom: 2px solid #4c3e70;
+  border-right: 1px dotted #fff;
+  transition: all .3s; }
+  .about-link:hover {
+    transition: .3s;
+    margin-top: -4px;
+    border-bottom: 4px solid #4c3e70;
+    background-color: #fff;
+    background-color: #7d719c;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.459); }
 
-.lol {
-  display: flex; }
+.test-package {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-top: 20px; }
+  .test-package::before {
+    content: 'Parent';
+    color: #fff;
+    display: block;
+    position: absolute;
+    z-index: 1000;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.582);
+    border-radius: 5px;
+    padding: 5px; }
+
+.test-div-block {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  width: 120px;
+  height: 120px;
+  background-color: #95c595;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #000; }
+  .test-div-block::before {
+    content: 'child';
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 10px; }
+
+.active-test-block {
+  background-color: #f37b57;
+  color: #fff; }
 
 
 /*# sourceMappingURL=main.css.map*/

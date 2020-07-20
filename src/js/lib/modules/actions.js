@@ -1,15 +1,6 @@
 import { call } from 'file-loader';
 import $ from '../core';
 
-$.prototype.ForEachConstructor = function (callback, filter) {
-  for (let i = 0; i < this.length; i += 1) {
-    if (!filter(this[i])) {
-      continue;
-    }
-    callback(i);
-  }
-};
-
 // getting HTML of collection
 $.prototype.html = function (content) {
   this.ForEachConstructor((iterator) => {

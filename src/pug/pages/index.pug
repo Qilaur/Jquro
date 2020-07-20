@@ -6,14 +6,18 @@ block variables
     - var pageClass = 'index';
 
 block content
-    h1.main-header Hello world
-    p.testP Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit, reiciendis cum! Fugiat magni, aperiam sapiente veniam quas ducimus consectetur tenetur numquam optio quaerat aliquam iusto omnis illum minus eos, nulla odit culpa minima impedit magnam pariatur perferendis delectus! Vitae dicta ea natus laborum impedit ad sapiente magni labore voluptatibus! Sequi voluptate ad laborum necessitatibus tempora. Velit veritatis saepe reprehenderit assumenda est, deserunt ea tempore doloribus tenetur harum animi magnam obcaecati. Repellat magnam praesentium vero tempore nam dolore fugiat aperiam, rem nesciunt, minus eligendi excepturi cupiditate, iste veniam. Nisi quibusdam debitis hic in corrupti quod distinctio quae dignissimos enim adipisci? Tempore aut aspernatur labore impedit omnis doloremque nostrum, est explicabo nihil quae aperiam, sunt, ad at eos natus. Quibusdam in eius beatae ipsa reiciendis, fuga quaerat delectus debitis deleniti! Aut est cumque quas reprehenderit expedita delectus fuga magnam a suscipit corrupti non ipsum eaque voluptatem sapiente id commodi, ipsa vero nisi sequi culpa ab facere nesciunt? Quas fuga voluptatum distinctio recusandae a. Tempore corporis temporibus inventore molestias. Mollitia, doloribus itaque laudantium accusamus facere ad esse debitis sed id unde quis maiores tempore corrupti, maxime inventore possimus fugiat dicta soluta provident iure! Quia id sunt tempora ducimus fuga harum tempore iure delectus!
-    .test
-      .lol a
-      - for(let i = 0; i < 16; i++)
-        .main-block O
-      .lol a
-    .main-block a;lsdfka;sdf
-    .main-block a;lsdfka;sdf
-    .main-block a;lsdfka;sdf
-    button.button Click Me!
+  h1.main-header Welcome to the Jquro
+  nav
+    a.about-link(href="https://github.com/Quazaru/Jquro") GitHub
+    a.about-link(href="https://vk.com/quiet_doom") Author in VK
+    a.about-link(href="https://github.com/Quazaru") Author in GitHub
+    a.about-link(href="https://youtu.be/tpiyEe_CqB4") video with cats, lol
+  .container
+    .test-package
+      - for(let i = 0; i < 10; i++)
+        .test-div-block 
+    .test-package
+      - for(let i = 0; i < 10; i++)
+        - if (i % 2 == 0)
+          .active-test-block.test-div-block 
+        .test-div-block 
