@@ -229,6 +229,17 @@ $.prototype.Init = function (selector) {
 $.prototype.Init.prototype = $.prototype; // bind object prototype to construcor prototype
 
 window.$ = $;
+
+$.prototype.ForEachConstructor = function (callback, filter) {
+  for (var i = 0; i < this.length; i += 1) {
+    if (!filter(this[i])) {
+      continue;
+    }
+
+    callback(i);
+  }
+};
+
 /* harmony default export */ __webpack_exports__["default"] = ($);
 
 /***/ }),
@@ -248,6 +259,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_attributes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/attributes */ "./js/lib/modules/attributes.js");
 /* harmony import */ var _modules_handlers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/handlers */ "./js/lib/modules/handlers.js");
 /* harmony import */ var _modules_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/actions */ "./js/lib/modules/actions.js");
+/* harmony import */ var _modules_animations_effects__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/animations/effects */ "./js/lib/modules/animations/effects.js");
+
 
 
 
@@ -283,18 +296,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
-
-
-_core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.ForEachConstructor = function (callback, filter) {
-  for (var i = 0; i < this.length; i += 1) {
-    if (!filter(this[i])) {
-      continue;
-    }
-
-    callback(i);
-  }
-}; // getting HTML of collection
-
+ // getting HTML of collection
 
 _core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.html = function (content) {
   var _this = this;
@@ -416,6 +418,94 @@ _core__WEBPACK_IMPORTED_MODULE_1__["default"].prototype.neighbours = function ()
     return item.parentNode;
   });
   return this;
+};
+
+/***/ }),
+
+/***/ "./js/lib/modules/animations/effects.js":
+/*!**********************************************!*\
+  !*** ./js/lib/modules/animations/effects.js ***!
+  \**********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core */ "./js/lib/core.js");
+
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.animationInit = function (_ref) {
+  var callback = _ref.callback,
+      dur = _ref.dur,
+      fin = _ref.fin;
+  var timeStart; // eslint-disable-next-line no-underscore-dangle
+
+  function _animationInit(time) {
+    if (!timeStart) {
+      timeStart = time;
+    }
+
+    var timeElapsed = time - timeStart;
+    var complection = Math.min(timeElapsed / dur, 1);
+    callback(complection);
+
+    if (timeElapsed < dur) {
+      requestAnimationFrame(_animationInit);
+    } else if (typeof fin === 'function') {
+      fin();
+    }
+  }
+
+  return _animationInit;
+};
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeIn = function (dur) {
+  var _this = this;
+
+  var display = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'block';
+  var fin = arguments.length > 2 ? arguments[2] : undefined;
+  this.ForEachConstructor(function (i) {
+    _this[i].style.display = display; // eslint-disable-next-line no-underscore-dangle
+
+    var _fadeIn = function _fadeIn(complection) {
+      _this[i].style.opacity = complection;
+    };
+
+    var anim = _this.animationInit({
+      dur: dur,
+      callback: _fadeIn,
+      fin: fin
+    });
+
+    requestAnimationFrame(anim);
+  }, function (item) {
+    return item.style;
+  });
+};
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeOut = function (dur, fin) {
+  var _this2 = this;
+
+  this.ForEachConstructor(function (i) {
+    // eslint-disable-next-line no-underscore-dangle
+    var _fadeOut = function _fadeOut(complection) {
+      _this2[i].style.opacity = 1 - complection;
+
+      if (complection === 1) {
+        _this2[i].style.display = 'none';
+      }
+    };
+
+    var anim = _this2.animationInit({
+      dur: dur,
+      callback: _fadeOut,
+      fin: fin
+    });
+
+    requestAnimationFrame(anim);
+  }, function (item) {
+    return item.style;
+  });
 };
 
 /***/ }),
@@ -749,7 +839,7 @@ var action = function action() {
   console.log(this, 'LOX');
 };
 
-console.log(Object(_lib_libMain__WEBPACK_IMPORTED_MODULE_1__["default"])('.main-block').neighbours());
+console.log(Object(_lib_libMain__WEBPACK_IMPORTED_MODULE_1__["default"])('.main-block').fadeOut(1000));
 
 /***/ }),
 

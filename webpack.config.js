@@ -82,7 +82,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(ttf|woff|woff2|txt|otf)$/,
+        test: /\.(ttf|woff|woff2|txt|otf|eot)$/,
         loader: 'file-loader',
         options: {
           outputPath: 'fonts',

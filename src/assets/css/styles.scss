@@ -1,32 +1,106 @@
 @import '~normalize.css';
-
-.main-block {
-  display: block;
-  max-width: 100px;
-  max-height: 100px;
-  background-color: red;
-  color: #fff;
-  font-size: 40px;
+@import './fonts.scss';
+.body {
+  background-color: #f4ffd4;
 }
-
-.beauty {
-  font-size: 50px;
-  background-color: rgb(185, 66, 66);
+.container {
   text-align: center;
+  font-family: 'Montserrat', serif;
+  padding: 20px 10%;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.459);
+  
+}
+.main-header {
+  text-align: center;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  padding: 20px 20px;
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 50px;
+  background-color: #665c7f;
+  border-radius: 5px;
+  border-bottom: 10px solid #4c3e70;
+  border-right: 4px solid #4c3e70;
 }
 
-.button {
-  background-color: rgb(218, 205, 96);
-  color: #000;
-  font-size: 20px;
-  padding: 20px;
-}
-
-.active {
-  color: red;
-  font-size: 50px;
-}
-
-.lol {
+nav {
   display: flex;
+  padding: 10px;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding: 20px;
+  &:first-child {
+    border-radius: 5px 0 0 5px;
+  }
+  &:last-child {
+    border-radius: 5px 0 0 5px;
+  }
 }
+.about-link {
+  text-align: center;
+  text-decoration: none;
+  width: 20%;
+  color: #fff;
+  font-size: 20px;
+  border-right: 1px solid #4c3f69;
+  background-color: #665c7f;
+  border-bottom: 2px solid #4c3e70;
+  border-right: 1px dotted #fff;
+  transition: all .3s;
+  &:hover {
+    transition: .3s;
+    margin-top: -4px;
+    border-bottom: 4px solid #4c3e70;
+    background-color: #fff;
+    background-color: #7d719c;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.459);
+  }
+}
+.test-package {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-top: 20px;
+  &::before {
+    content: 'Parent';
+    color: #fff;
+    display: block;
+    position: absolute;
+    z-index: 1000;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.582);
+    border-radius: 5px;
+    padding: 5px;
+  }
+}
+.test-div-block {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  width: 120px;
+  height: 120px;
+  background-color: #95c595;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  &::before {
+    content: 'child';
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+}
+ .active-test-block {
+   background-color: #f37b57;
+  color: #fff;
+ }

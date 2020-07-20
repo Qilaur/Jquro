@@ -200,4 +200,22 @@ else you have a greater than 1 element, each of elements in collection replaced 
 >``` 
 >  $('.slide.active').neighbours().d('none');
 >```
-
+## 🔸 Work with _**Animation**_
+### .fadeIn( duration )
+shows elements with fade animation
+> 🔧 _**Parameters**_
+> * _duration_ - duration of the animation
+##### Examples  
+ ```
+ $('div.cola a').fadeIn('div.cola');
+ $('nav a.kitten').fadeIn('nav');
+```
+### .fadeOut( duration )
+hide elements with fade animation, after animation delete elements
+> 🔧 _**Parameters**_
+> * _duration_ - duration of the animation
+##### Examples  
+ ```
+ $('div.cola a').fadeOut('div.cola');
+ $('nav a.kitten').fadeOut('nav');
+ ```

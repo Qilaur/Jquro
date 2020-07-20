@@ -22,4 +22,13 @@ $.prototype.Init.prototype = $.prototype; // bind object prototype to construcor
 
 window.$ = $;
 
+$.prototype.ForEachConstructor = function (callback, filter) {
+  for (let i = 0; i < this.length; i += 1) {
+    if (!filter(this[i])) {
+      continue;
+    }
+    callback(i);
+  }
+};
+
 export default $;

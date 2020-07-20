@@ -7,4 +7,4 @@ import $ from './lib/libMain';
 const action = function () {
   console.log(this, 'LOX');
 };
-console.log($('.main-block').neighbours());
+console.log($('.main-block').fadeOut(1000));
